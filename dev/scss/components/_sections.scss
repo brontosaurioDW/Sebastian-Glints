@@ -1,0 +1,40 @@
+main {
+	position: relative;
+	min-height: 100vh;   	
+
+	&:before {
+	  display: block;
+	  content: "";
+	  background: url(../img/trama.png) repeat center center transparent;
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  z-index: 21;
+	  opacity: 0.2;
+	}
+}
+
+section {
+	position: relative;
+	min-height: 100vh;
+}
+
+.sg-content {
+    color: $light;
+    position: relative;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 15vh 15px;
+}
+
+.sg-isologo {
+	background-attachment: unset;
+	background-size: 100%;
+	display: block;
+	width: 35vw;
+	height: 35vw;
+	left: 15vw;
+	top: 13vh;
+}
