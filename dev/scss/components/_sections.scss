@@ -1,6 +1,6 @@
-main {
+#fullpage {
 	position: relative;
-	min-height: 100vh;   	
+	//min-height: 100vh;   	
 
 	&:before {
 	  display: block;
@@ -27,7 +27,7 @@ section {
     max-width: 1140px;
     margin: 0 auto;
     padding: 15vh 15px;
-}
+} 
 
 .sg-isologo {
 	background-attachment: unset;
