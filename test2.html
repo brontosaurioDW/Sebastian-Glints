@@ -75,8 +75,47 @@
 					</ul>
 
 					<div class="sg-content">
-						<h2 class="sg-song-title" data-aos="zoom-out">1. Can’t Stop The Music</h2> 						
-				</div>
+						<h2 class="sg-song-title">1. Can’t Stop The Music</h2>
+
+						<div class="sg-song-lyric">
+							<p>
+								<span> Whenever I press play on my iPod </span>
+								<span> My heart starts beating loud </span>
+								<span> My favorite song comin out of my headphones </span>
+								<span> I can feel so alive </span>
+								<span> Wearing a smile right on my face </span>
+								<span> On the bus or walking down the street </span>
+								<span> It’s like I’m taken to a different place </span>
+								<span> I just gotta lose myself to the beat </span>
+								<span> You can stare if you want </span>
+								<span> Join the party or don’t </span>
+								<span> Can’t you see that I am outta control? </span>
+								<span> I can feel my blood shaking </span>
+								<span> My body starts vibrating </span>
+								<span> I can’t stop the music </span>
+								<span> I can’t stop the music </span>
+								<span> I can’t stop the music </span>
+								<span> In my soul </span>
+								<span> Whenever I press play on my stereo </span>
+								<span> My feet start moving along </span>
+								<span> With my jam coming out of my speakers </span>
+								<span> Nothing in the world can go wrong </span>
+								<span> It’s like it takes me straight to the weekend </span>
+								<span> Where I’m free to dance around </span>
+								<span> This is the soundtrack of my day </span>
+								<span> This is what life is all about </span>
+								<span> You can stare if you want </span>
+								<span> Join the party or don’t </span>
+								<span> Can’t you see that I am outta control? </span>
+								<span> I can feel my blood shaking </span>
+								<span> My body starts vibrating </span>
+								<span> I can’t stop the music </span>
+								<span> I can’t stop the music </span>
+								<span> I can’t stop the music </span>
+								<span> In my soul </span>
+							</p>							
+						</div> 						
+					</div>
 				</div>
 			</div>
 
@@ -316,8 +355,17 @@
 			$(document).ready(function() {
 				$('#fullpage').fullpage({
 					licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
+					menu: '.nav-wrapper ul',
+					navigation: false,
 					autoScrolling: true,
-					scrollHorizontally: false
+					scrollHorizontally: false,
+					verticalCentered: true,
+					scrollOverflow: true,
+					scrollOverflowReset: false,
+					scrollOverflowOptions: null,
+					lazyLoading: true,
+					parallax: false,
+					parallaxOptions: {type: 'reveal', percentage: 62, property: 'translate'},
 				});
 
 				//methods

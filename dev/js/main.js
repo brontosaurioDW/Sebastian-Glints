@@ -9,7 +9,7 @@ $(window).on("load",function(){
 });
 
 // Menu
-/*(function() {
+(function() {
 	var container = document.querySelector( '.sg-wrapper' ),
 		triggerBttn = document.getElementById( 'trigger-overlay' ),
 		overlay = document.querySelector( '.overlay' ),
@@ -52,5 +52,5 @@ $(window).on("load",function(){
 	triggerBttn.addEventListener( 'click', toggleOverlay );
 	closeBttn.addEventListener( 'click', toggleOverlay );
 })();
-*/
+
 // Scroll
