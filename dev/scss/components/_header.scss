@@ -5,7 +5,7 @@
     position: fixed;
     -webkit-transform-origin: left top;
     -webkit-transform: rotate(-90deg) translateX(-100%);
-    z-index: 22;
+    z-index: 102;
 
     .logo {
         font-size: 0;
@@ -63,7 +63,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(153, 204, 51, 0.9);
+    z-index: 101;
 }
 
 /* Overlay closing cross */
@@ -214,4 +214,14 @@
     .overlay ul li {
         min-height: 34px;
     }
+}
+
+#fp-nav.fp-left {
+    left: 55px;
+}
+
+#fp-nav ul li a span, 
+.fp-slidesNav ul li a span {
+    background: #fff;
+    opacity: 0.7;
 }

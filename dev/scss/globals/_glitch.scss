@@ -1,6 +1,4 @@
 .sg-glitch_list {
-  width: 100%;
-  height: 100vh;
   position: absolute;
   overflow: hidden;
   left: 0;
@@ -13,7 +11,7 @@
   background-color: transparent;
   background-blend-mode: normal;
   background-repeat: no-repeat;
-  //background-attachment: fixed;
+  background-attachment: fixed;
   background-position: right center;
   position: absolute;
   top: 0;

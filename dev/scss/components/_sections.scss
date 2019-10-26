@@ -1,41 +1,102 @@
 main {
 	position: relative;
-	//min-height: 100vh;   	
-
-	&:before {
-	  display: block;
-	  content: "";
-	  background: url(../img/trama.png) repeat center center transparent;
-	  position: absolute;
-	  left: 0;
-	  right: 0;
-	  top: 0;
-	  bottom: 0;
-	  z-index: 21;
-	  opacity: 0.2;
-	}
 }
 
 .sg-section {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .sg-content {
     color: $light;
     position: relative;
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 15vh 15px;
+    padding: 15vh 85px;
 } 
 
-.sg-isologo {
+.sg-isologo-a,
+.sg-isologo-b {
 	background-attachment: unset;
-	background-size: 100%;
-	display: block;
-	width: 35vw;
-	height: 35vw;
-	left: 15vw;
-	top: 13vh;
+    background-size: 100%;
+    display: block;    
+}
+
+.sg-isologo-a {        
+    width: 39vh;
+    height: 36vh;
+    top: 32vh;
+    left: 19vw;
+}
+
+.sg-isologo-b {	
+    width: 37vh;
+    height: 65vh;
+    top: 17vh;
+    left: 19vw;
+}
+
+.iso-a {
+  -webkit-animation: smooth 50s infinite;
+  animation: smooth 50s infinite;
+  transition: 0.3s;
+}
+
+.iso-b {
+  -webkit-animation: smooth 40s infinite;
+  animation: smooth 40s infinite;
+  transition: 0.3s;
+} 
+
+
+@-webkit-keyframes smooth {
+	0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+		margin-left: 5px;
+		margin-top: 10px;
+	}
+
+	5%,
+	15%,
+	25%,
+	35%,
+	45%,
+	55%,
+	65%,
+	75%,
+	85%,
+	95% {
+		margin-left: -5px;
+		margin-top: -10px;
+	}
+}
+
+@keyframes smooth {
+    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+		margin-left: 5px;
+		margin-top: 10px;
+	}
+
+	5%,
+	15%,
+	25%,
+	35%,
+	45%,
+	55%,
+	65%,
+	75%,
+	85%,
+	95% {
+		margin-left: -5px;
+		margin-top: -10px;
+	}
+}
+
+
+
+
+.footer {
+	background: url(../img/trama-b.jpg) repeat 50% transparent;
+	color: $light;
 }

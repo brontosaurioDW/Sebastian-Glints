@@ -1,14 +1,57 @@
 .sg-song-title {
 	font-family: $featured;
-	font-size: $title; 	    
-	text-shadow: 1px 2px 2px $purple;
+	font-size: 2.4rem; 	    
 	text-transform: uppercase;
-	font-weight: 900;
+	font-weight: 400;
+	opacity: 0.7;
+
+	.icon {
+	    background: url(../img/loading.png) no-repeat center center transparent;
+	    background-size: 100%;
+	    display: inline-block;
+	    width: 35px;
+	    height: 40px;
+	    vertical-align: middle;
+
+	    & + span {
+	    	display: inline-block;
+	    	vertical-align: middle;
+	    }
+	}
 }
 
 .sg-song-lyric {
+	opacity: 0.7;
+
 	span {
-		display: block;
-		font-size: 3rem;
+	    display: block;
+	    margin: 1.5rem 0 0;
+	    margin-left: 45px;
+	    font-family: $featured;
+		font-size: 2rem;
+		font-weight: 400;
+	}
+}
+
+.song-center {
+	text-align: center;
+
+	.sg-song-lyric {
+
+		span {
+		    display: block;
+		    margin: 1.5rem 0 0;
+		}
+	}
+}
+
+.plain-bg {
+	background: url(../img/trama-b.jpg) repeat center center transparent;
+}
+
+.dark-text {
+	h2,
+	p {
+		color: $dark;
 	}
 }
