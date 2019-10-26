@@ -51,6 +51,14 @@ $(window).on("load", function() {
 
     triggerBttn.addEventListener('click', toggleOverlay);
     closeBttn.addEventListener('click', toggleOverlay);
+
+    var menuOption = $(overlay).find('.option');
+    $(menuOption).each(function () {
+    	console.log('clcik');
+    	$(this).on('click', function(){
+	    	$(overlay).removeClass('open');
+    	});
+    });
 })();
 
 // Scroll
