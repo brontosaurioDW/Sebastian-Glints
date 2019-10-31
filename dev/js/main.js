@@ -95,6 +95,19 @@ $(document).ready(function() {
 
 var listenToWheel = true;
 
+
+function checkLastLyric() {
+
+  console.log("this lyric num " + thisLyricNum);
+  console.log("total " + lyricsInSong.length);
+
+    if (thisLyricNum >= lyricsInSong.length) {
+      lastLyric = true;
+    } else {
+      lastLyric = false;
+    }
+}
+
 $(allSongs[currentSongNum]).bind('mousewheel DOMMouseScroll', function (e) {
 
 
@@ -109,6 +122,8 @@ $(allSongs[currentSongNum]).bind('mousewheel DOMMouseScroll', function (e) {
        scrollInSong();
        thisLyricNum++;
        prevLyricNum++;
+
+       checkLastLyric();
 
        setTimeout(function(){
 
@@ -171,6 +186,8 @@ function scrollInSong() {
   showHideLyrics(thisLyric, prevLyric);
 
   //blockScroll();
+
+
 
 
 
