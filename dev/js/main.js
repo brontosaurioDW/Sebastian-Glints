@@ -53,8 +53,24 @@ $(document).ready(function() {
     triggerBttn.addEventListener('click', toggleOverlay);
     closeBttn.addEventListener('click', toggleOverlay);
 
+})();
+
+// Scroll
+
+
+var allSongs = document.getElementsByClassName("js-song");
+
+var currentSongNum = 0;
+var currentLyric;
+
+var lastLyric = false;
+
+
+$(document).ready(function() {
+
 	new fullpage('#fullpage', {
-		menu: '#menu',
+		//menu: '#menu',
+		//anchors:['cover', 'song-1', 'song-2', 'song-3', 'song-4', 'song-5', 'song-6', 'song-7', 'song-8', 'song-9', 'song-10', 'song-11', 'song-12', 'song-13',],
 		navigation: true,
 		navigationPosition: 'left',
 
@@ -65,7 +81,7 @@ $(document).ready(function() {
 		parallax: true,
 		css3: false,
 		scrollbars: true,
-        licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
+		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
         onLeave: function(origin, destination, direction){
             if(direction == 'down'){
                 console.log($(destination.item));
@@ -84,5 +100,114 @@ $(document).ready(function() {
             fullpage_api.moveTo(3);
             toggleOverlay();
     	});
-    });     
+    });    
+
 });
+
+var listenToWheel = true;
+
+
+function checkLastLyric() {
+
+  console.log("this lyric num " + thisLyricNum);
+  console.log("total " + lyricsInSong.length);
+
+    if (thisLyricNum >= lyricsInSong.length) {
+      lastLyric = true;
+    } else {
+      lastLyric = false;
+    }
+}
+
+$(allSongs[currentSongNum]).bind('mousewheel DOMMouseScroll', function (e) {
+
+
+
+
+      checkBlock();
+
+
+     if (listenToWheel) {
+
+       listenToWheel = false;
+       scrollInSong();
+       thisLyricNum++;
+       prevLyricNum++;
+
+       checkLastLyric();
+
+       setTimeout(function(){
+
+         listenToWheel = true;
+
+       }, 1000);
+
+     }
+
+});
+
+
+function checkBlock() {
+
+  if (!lastLyric) {
+    blockScroll();
+  } else {
+    allowScroll();
+  }
+
+}
+
+
+function allowScroll() {
+  fullpage_api.setAllowScrolling(true, 'down, right');
+}
+
+function blockScroll() {
+  fullpage_api.setAllowScrolling(false, 'down, right');
+}
+
+function showHideLyrics(thisLyric, prevLyric) {
+
+  if (thisLyricNum > 0) {
+    prevLyric.classList.add('d-none');
+    thisLyric.classList.remove('d-none');
+  }
+
+
+}
+
+
+var lyricsInSong;
+var thisLyricNum = 0;
+var prevLyricNum = -1;
+var thisLyric;
+var prevLyric;
+
+
+function scrollInSong() {
+
+
+
+  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+
+  thisLyric = lyricsInSong[thisLyricNum];
+  prevLyric = lyricsInSong[prevLyricNum];
+
+  //console.log(thisLyric);
+  showHideLyrics(thisLyric, prevLyric);
+
+  //blockScroll();
+
+
+
+
+
+}
+
+function checkEndSong() {
+  if ( something ) {
+    allowScroll();
+    currentSongNum++;
+    blockScroll();
+  }
+}
