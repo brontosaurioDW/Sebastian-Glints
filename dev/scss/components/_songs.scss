@@ -24,12 +24,16 @@
 	opacity: 0.7;
 
 	span {
+		position: absolute;
 	    display: block;
+	    visibility: visible;
+	    opacity: 1;
 	    margin: 1.5rem 0 0;
 	    margin-left: 45px;
 	    font-family: $featured;
-			font-size: 10rem;
-			font-weight: 400;
+		font-size: 12rem;
+		font-weight: 400;
+		transition: visibility 0s, opacity 0.8s linear;
 	}
 }
 

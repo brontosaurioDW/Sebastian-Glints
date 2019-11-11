@@ -187,6 +187,10 @@ function activateEndSong() {
 
 }
 
+
+
+
+
 function checkEndSong() {
   if ( thisLyricNum ==  lyricsInSong.length ) {
 
@@ -214,13 +218,9 @@ function checkEndSong() {
 
 $('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
 
-    console.log("scriooolll");
-
      if (listenToWheel) {
 
        listenToWheel = false;
-
-       console.log("estamo adentro");
 
        checkEndSong();
 

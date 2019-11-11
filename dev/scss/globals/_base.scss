@@ -14,7 +14,8 @@ body {
 }
 
 .d-none {
-	display: none!important;
+	opacity: 0!important;
+	visibility: hidden!important;
 }
 
 .loader {
