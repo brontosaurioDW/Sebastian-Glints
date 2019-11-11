@@ -104,58 +104,22 @@ $(document).ready(function() {
 
 });
 
+
+
+
+
+
+
+
+
 var listenToWheel = true;
 
 
-function checkLastLyric() {
-
-  console.log("this lyric num " + thisLyricNum);
-  console.log("total " + lyricsInSong.length);
-
-    if (thisLyricNum >= lyricsInSong.length) {
-      lastLyric = true;
-    } else {
-      lastLyric = false;
-    }
-}
-
-$(allSongs[currentSongNum]).bind('mousewheel DOMMouseScroll', function (e) {
 
 
 
 
-      checkBlock();
 
-
-     if (listenToWheel) {
-
-       listenToWheel = false;
-       scrollInSong();
-       thisLyricNum++;
-       prevLyricNum++;
-
-       checkLastLyric();
-
-       setTimeout(function(){
-
-         listenToWheel = true;
-
-       }, 1000);
-
-     }
-
-});
-
-
-function checkBlock() {
-
-  if (!lastLyric) {
-    blockScroll();
-  } else {
-    allowScroll();
-  }
-
-}
 
 
 function allowScroll() {
@@ -165,6 +129,9 @@ function allowScroll() {
 function blockScroll() {
   fullpage_api.setAllowScrolling(false, 'down, right');
 }
+
+
+
 
 function showHideLyrics(thisLyric, prevLyric) {
 
@@ -178,18 +145,32 @@ function showHideLyrics(thisLyric, prevLyric) {
 
 
 var lyricsInSong;
+
+lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+
 var thisLyricNum = 0;
 var prevLyricNum = -1;
 var thisLyric;
 var prevLyric;
 
 
+
+
+
 function scrollInSong() {
 
+  blockScroll();
+
+  console.log("la cancion es: " + currentSongNum);
 
 
   lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
 
+
+  console.log("este lyric es " + thisLyricNum);
+  console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
+
+  
   thisLyric = lyricsInSong[thisLyricNum];
   prevLyric = lyricsInSong[prevLyricNum];
 
@@ -198,16 +179,68 @@ function scrollInSong() {
 
   //blockScroll();
 
+  thisLyricNum++;
+  prevLyricNum++;
+
+
+}
 
 
 
+function activateEndSong() {
+
+  console.log("ok, la termino");
+  allowScroll();
+  currentSongNum++;
+  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+  thisLyricNum = 0;
+  prevLyricNum = -1;
 
 }
 
 function checkEndSong() {
-  if ( something ) {
-    allowScroll();
-    currentSongNum++;
-    blockScroll();
+  if ( thisLyricNum ==  lyricsInSong.length ) {
+
+    console.log("termino la cancion");
+    activateEndSong();
+
+  } else {
+
+    console.log("la cancion sigue");
+    scrollInSong();
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+$('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
+
+    console.log("scriooolll");
+
+     if (listenToWheel) {
+
+       listenToWheel = false;
+
+       console.log("estamo adentro");
+
+       checkEndSong();
+
+       setTimeout(function(){
+
+         listenToWheel = true;
+
+       }, 500);
+
+     }
+
+});
