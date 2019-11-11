@@ -212,21 +212,23 @@ function checkEndSong() {
 
 
 
-$(allSongs[currentSongNum]).bind('mousewheel DOMMouseScroll', function (e) {
+$('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
+
+    console.log("scriooolll");
 
      if (listenToWheel) {
 
        listenToWheel = false;
 
+       console.log("estamo adentro");
 
        checkEndSong();
-
 
        setTimeout(function(){
 
          listenToWheel = true;
 
-       }, 1000);
+       }, 500);
 
      }
 
