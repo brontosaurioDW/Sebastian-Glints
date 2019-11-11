@@ -8,14 +8,13 @@ $(window).on("load", function() {
     $(".loader").fadeOut("slow");
 });
 
-// Scroll
-$(document).ready(function() {
-
-    var container = document.querySelector('#fullpage'),
+// Menu
+(function() {
+    var container = document.querySelector('.sg-wrapper'),
         triggerBttn = document.getElementById('trigger-overlay'),
         overlay = document.querySelector('.overlay'),
         closeBttn = overlay.querySelector('.overlay-close');
-        transEndEventNames = {
+    transEndEventNames = {
             'WebkitTransition': 'webkitTransitionEnd',
             'MozTransition': 'transitionend',
             'OTransition': 'oTransitionEnd',
@@ -53,6 +52,13 @@ $(document).ready(function() {
     triggerBttn.addEventListener('click', toggleOverlay);
     closeBttn.addEventListener('click', toggleOverlay);
 
+    var menuOption = $(overlay).find('.option');
+    $(menuOption).each(function () {
+    	//console.log('clcik');
+    	$(this).on('click', function(){
+	    	$(overlay).removeClass('open');
+    	});
+    });
 })();
 
 // Scroll
@@ -82,25 +88,16 @@ $(document).ready(function() {
 		css3: false,
 		scrollbars: true,
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
-        onLeave: function(origin, destination, direction){
-            if(direction == 'down'){
-                console.log($(destination.item));
-                $(destination.item).scrollTop(0);
-            } else {
-                console.log('up');
-                $(destination).scrollTop(10000);
-            }
-        }
-    });
-    
-    var menuOption = $(overlay).find('.option');
-    $(menuOption).each(function () {
-    	$(this).on('click', function(e){
-            e.preventDefault();
-            fullpage_api.moveTo(3);
-            toggleOverlay();
-    	});
-    });    
+         afterLoad: function(origin, destination, direction){
+        //prevenimos el desplazamiento si la sección de destino es la tercera de la página
+        
+        currentSongNum = destination.index - 1;
+        console.log("TAMO en la cancion numero: " + currentSongNum);
+        songChanged();
+
+    }
+	});
+
 
 });
 
@@ -139,7 +136,6 @@ function showHideLyrics(thisLyric, prevLyric) {
     prevLyric.classList.add('d-none');
     thisLyric.classList.remove('d-none');
   }
-
 
 }
 
@@ -192,13 +188,21 @@ function activateEndSong() {
   console.log("ok, la termino");
   allowScroll();
   currentSongNum++;
-  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-  thisLyricNum = 0;
-  prevLyricNum = -1;
+//  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+//  thisLyricNum = 0;
+//  prevLyricNum = -1;
 
 }
 
 
+
+function songChanged() {
+
+    lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+    thisLyricNum = 0;
+    prevLyricNum = -1;
+
+}
 
 
 
@@ -226,8 +230,8 @@ function checkEndSong() {
 
 
 
-
 $('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
+
 
      if (listenToWheel) {
 
@@ -239,8 +243,12 @@ $('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
 
          listenToWheel = true;
 
-       }, 500);
+       }, 400);
 
      }
 
 });
+
+
+
+
