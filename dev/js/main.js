@@ -106,6 +106,10 @@ $(document).ready(function() {
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
     afterLoad: function(origin, destination, direction){
       currentSongNum = destination.index - 1;
+      thisLyric = lyricsInSong[0];
+      prevLyric = lyricsInSong[thisLyricNum];
+      showHideLyrics(thisLyric, prevLyric);
+      allSongs[currentSongNum].setAttribute('data-lyricnum',0);
       console.log("TAMO en la cancion numero: " + currentSongNum);
       songChanged();
     }
@@ -168,7 +172,6 @@ function scrollInSong(direction) {
 }
 
 function activateEndSong(direction) {
-
   console.log("ok, la termino");
   allowScroll();
   currentSongNum += direction;
@@ -177,9 +180,7 @@ function activateEndSong(direction) {
 function songChanged() {
 
   if(currentSongNum >= 0){
-
     lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-
   }
 
 }
