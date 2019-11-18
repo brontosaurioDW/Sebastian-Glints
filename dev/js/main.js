@@ -61,16 +61,32 @@ $(window).on("load", function() {
     });
 })();
 
+// Scroll Direction
+
+function findScrollDirectionOtherBrowsers(event){
+  var delta;
+
+  if (event.wheelDelta){
+      delta = event.wheelDelta;
+  } else {
+      delta = -1 * event.deltaY;
+  }
+
+  if (delta < 0){
+    return 1;
+  }else if (delta > 0){
+    return -1;
+  }
+
+}
+
 // Scroll
 
-
+var lastScrollTop = 0;
 var allSongs = document.getElementsByClassName("js-song");
-
 var currentSongNum = 0;
 var currentLyric;
-
 var lastLyric = false;
-
 
 $(document).ready(function() {
 
@@ -88,13 +104,10 @@ $(document).ready(function() {
 		css3: false,
 		scrollbars: true,
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
-         afterLoad: function(origin, destination, direction){
-        //prevenimos el desplazamiento si la sección de destino es la tercera de la página
-        
-        currentSongNum = destination.index - 1;
-        console.log("TAMO en la cancion numero: " + currentSongNum);
-        songChanged();
-
+    afterLoad: function(origin, destination, direction){
+      currentSongNum = destination.index - 1;
+      console.log("TAMO en la cancion numero: " + currentSongNum);
+      songChanged();
     }
 	});
 
@@ -102,37 +115,19 @@ $(document).ready(function() {
 });
 
 
-
-
-
-
-
-
-
 var listenToWheel = true;
 
-
-
-
-
-
-
-
-
 function allowScroll() {
-  fullpage_api.setAllowScrolling(true, 'down, right');
+  fullpage_api.setAllowScrolling(true, 'up, down, right');
 }
 
 function blockScroll() {
-  fullpage_api.setAllowScrolling(false, 'down, right');
+  fullpage_api.setAllowScrolling(false, 'up, down, right');
 }
-
-
-
 
 function showHideLyrics(thisLyric, prevLyric) {
 
-  if (thisLyricNum > 0) {
+  if (thisLyricNum >= 0) {
     prevLyric.classList.add('d-none');
     thisLyric.classList.remove('d-none');
   }
@@ -144,28 +139,23 @@ var lyricsInSong;
 
 lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
 
-var thisLyricNum = 0;
-var prevLyricNum = -1;
+var thisLyricNum;
+var prevLyricNum;
 var thisLyric;
 var prevLyric;
 
-
-
-
-
-function scrollInSong() {
+function scrollInSong(direction) {
 
   blockScroll();
 
   console.log("la cancion es: " + currentSongNum);
 
-
   lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-
+  thisLyricNum += direction;
+  prevLyricNum = thisLyricNum + (direction * -1);
 
   console.log("este lyric es " + thisLyricNum);
   console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
-
   
   thisLyric = lyricsInSong[thisLyricNum];
   prevLyric = lyricsInSong[prevLyricNum];
@@ -173,79 +163,61 @@ function scrollInSong() {
   //console.log(thisLyric);
   showHideLyrics(thisLyric, prevLyric);
 
-  //blockScroll();
-
-  thisLyricNum++;
-  prevLyricNum++;
-
+  allSongs[currentSongNum].setAttribute('data-lyricnum',thisLyricNum);
 
 }
 
-
-
-function activateEndSong() {
+function activateEndSong(direction) {
 
   console.log("ok, la termino");
   allowScroll();
-  currentSongNum++;
-//  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-//  thisLyricNum = 0;
-//  prevLyricNum = -1;
-
+  currentSongNum += direction;
 }
-
-
 
 function songChanged() {
 
+  if(currentSongNum >= 0){
+
     lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-    thisLyricNum = 0;
-    prevLyricNum = -1;
+
+  }
 
 }
 
+function checkEndSong(direction) {
 
+  dataLyric = allSongs[currentSongNum].getAttribute('data-lyricnum') ? allSongs[currentSongNum].getAttribute('data-lyricnum') : 0;
+  thisLyricNum = parseInt(dataLyric);
 
-function checkEndSong() {
-  if ( thisLyricNum ==  lyricsInSong.length ) {
+  if ( (direction == 1 && thisLyricNum == lyricsInSong.length - 1) || (direction == -1 && thisLyricNum == 0) ) {
 
     console.log("termino la cancion");
-    activateEndSong();
+    activateEndSong(direction);
 
   } else {
 
     console.log("la cancion sigue");
-    scrollInSong();
+    scrollInSong(direction);
 
   }
 }
 
+$('.js-song').bind('wheel', function (e) {
 
+  var st = window.pageYOffset || document.documentElement.scrollTop;
+  var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
 
+  if (listenToWheel) {
+    listenToWheel = false;
 
+    checkEndSong(direction);
 
+    setTimeout(function(){
+      listenToWheel = true;
+    }, 400);
+  }
 
-
-
-
-
-
-$('.js-song').bind('mousewheel DOMMouseScroll', function (e) {
-
-
-     if (listenToWheel) {
-
-       listenToWheel = false;
-
-       checkEndSong();
-
-       setTimeout(function(){
-
-         listenToWheel = true;
-
-       }, 400);
-
-     }
+  lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
 });
 
