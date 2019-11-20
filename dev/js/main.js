@@ -106,10 +106,6 @@ $(document).ready(function() {
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
     afterLoad: function(origin, destination, direction){
       currentSongNum = destination.index - 1;
-      thisLyric = lyricsInSong[0];
-      prevLyric = lyricsInSong[thisLyricNum];
-      showHideLyrics(thisLyric, prevLyric);
-      allSongs[currentSongNum].setAttribute('data-lyricnum',0);
       console.log("TAMO en la cancion numero: " + currentSongNum);
       songChanged();
     }
@@ -132,8 +128,12 @@ function blockScroll() {
 function showHideLyrics(thisLyric, prevLyric) {
 
   if (thisLyricNum >= 0) {
-    prevLyric.classList.add('d-none');
-    thisLyric.classList.remove('d-none');
+    if(thisLyric){
+      if(prevLyric){
+        prevLyric.classList.add('d-none');
+      }
+      thisLyric.classList.remove('d-none');
+    }
   }
 
 }
@@ -172,14 +172,22 @@ function scrollInSong(direction) {
 }
 
 function activateEndSong(direction) {
-  console.log("ok, la termino");
-  allowScroll();
+  //allowScroll();
+  if(direction == 1) {
+    fullpage_api.moveSectionDown();
+  } else {
+    fullpage_api.moveSectionUp();
+  }
   currentSongNum += direction;
 }
 
 function songChanged() {
 
   if(currentSongNum >= 0){
+    thisLyric = lyricsInSong[0];
+    prevLyric = lyricsInSong[thisLyricNum];
+    showHideLyrics(thisLyric, prevLyric);
+    allSongs[currentSongNum].setAttribute('data-lyricnum',0);
     lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
   }
 
@@ -187,7 +195,7 @@ function songChanged() {
 
 function checkEndSong(direction) {
 
-  dataLyric = allSongs[currentSongNum].getAttribute('data-lyricnum') ? allSongs[currentSongNum].getAttribute('data-lyricnum') : 0;
+  dataLyric = currentSongNum >= 0 && allSongs[currentSongNum].getAttribute('data-lyricnum') ? allSongs[currentSongNum].getAttribute('data-lyricnum') : 0;
   thisLyricNum = parseInt(dataLyric);
 
   if ( (direction == 1 && thisLyricNum == lyricsInSong.length - 1) || (direction == -1 && thisLyricNum == 0) ) {
@@ -203,9 +211,11 @@ function checkEndSong(direction) {
   }
 }
 
+var ts;
+
 $('.js-song').bind('wheel', function (e) {
 
-  var st = window.pageYOffset || document.documentElement.scrollTop;
+  var ts = window.pageYOffset || document.documentElement.scrollTop;
   var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
 
   if (listenToWheel) {
@@ -218,10 +228,42 @@ $('.js-song').bind('wheel', function (e) {
     }, 400);
   }
 
-  lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+  lastScrollTop = ts <= 0 ? 0 : ts; // For Mobile or negative scrolling
 
 });
 
+$(document).bind('touchmove', function (e){
+  return false;
+});
 
+$(document).bind('touchstart', function (e){
+  ts = e.originalEvent.touches[0].clientY;
+});
 
+$(document).bind('touchend', function (e){
+  var te = e.originalEvent.changedTouches[0].clientY;
+  var direction;
 
+  if(ts > te+5){
+    direction = 1;
+  } else if(ts < te-5){
+    direction = -1;
+  }
+
+  if(currentSongNum >= 0){
+    
+    if (listenToWheel) {
+      listenToWheel = false;
+      
+      checkEndSong(direction);
+      
+      setTimeout(function(){
+        listenToWheel = true;
+      }, 400);
+    }
+  } else {
+
+    blockScroll();
+    
+  }
+});
