@@ -14,7 +14,8 @@ main {
 .sg-content {
     color: $light;
     position: relative;
-    padding: 15vh 85px;
+    margin: 10vh 10vw;
+    min-height: calc(100vh - 20vh);
 } 
 
 .sg-isologo-a,
@@ -94,9 +95,34 @@ main {
 }
 
 
-
-
 .footer {
 	background: url(../img/trama-b.jpg) repeat 50% transparent;
 	color: $light;
+}
+
+
+@media screen and (max-width: 991px) {
+	.sg-content {
+	    margin: 10vh 10vw 10vh 20vw;
+	}
+
+	.sg-isologo-a {
+	    width: 24vh;
+	    height: 20vh;
+	    top: unset;
+	    left: 32vw;
+	    bottom: 8vh;
+	}
+
+	.sg-isologo-b {
+	    width: 25vh;
+	    height: 45vh;
+	    top: unset;
+	    left: 32vw;
+	    bottom: -3vh;
+	}
+
+	#fp-nav {
+		display: none;
+	}
 }

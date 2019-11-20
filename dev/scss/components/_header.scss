@@ -238,3 +238,31 @@
     background: #fff;
     opacity: 0.7;
 }
+
+@media screen and (max-width: 991px) {
+    .overlay {
+        .nav-wrapper {
+            text-align: left;
+            top: 0;
+            height: 100vh;
+            transform: none;
+            overflow-y: auto;
+        }
+
+        ul {
+            display: block;
+            padding: 5rem 0;
+
+            li {
+                width: 100%;
+                text-align: left;
+                margin: 1rem 0;
+                padding-left: 4rem;
+
+                a {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+}
