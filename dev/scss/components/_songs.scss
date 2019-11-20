@@ -1,9 +1,8 @@
 .sg-song-title {
 	font-family: $featured;
-	font-size: 2.4rem;
+	font-size: 2.6rem;
 	text-transform: uppercase;
 	font-weight: 400;
-	opacity: 0.7;
 
 	.icon {
 	    background: url(../img/loading.png) no-repeat center center transparent;
@@ -21,32 +20,35 @@
 }
 
 .sg-song-lyric {
-	opacity: 0.7;
 
 	span {
 		position: absolute;
-	    display: block;
-	    visibility: visible;
-	    opacity: 1;
-	    margin: 1.5rem 0 0;
-	    margin-left: 45px;
-	    font-family: $featured;
-		font-size: 12rem;
-		font-weight: 400;
-		transition: visibility 0s, opacity 1s linear;
+		display: block;
+		visibility: visible;
+		opacity: 1;
+		margin: 1.5rem 0 0 45px;
+		font-family: Economica,sans-serif;
+		font-size: 11rem;
+		font-weight: 700;
+        text-shadow: 10px 10px 0 #000000;
+		-webkit-transition: visibility 0s,opacity 1s linear;
+		transition: visibility 0s,opacity 1s linear;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: 0;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
 	}
 }
 
 .song-center {
 	text-align: center;
-
-	.sg-song-lyric {
-
-		span {
-		    display: block;
-		    margin: 1.5rem 0 0;
-		}
-	}
 }
 
 .plain-bg {
@@ -57,5 +59,18 @@
 	h2,
 	p {
 		color: $dark;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.sg-song-title {
+	    font-size: 2.1rem;
+	}
+
+	.sg-song-lyric {
+		span {
+			text-shadow: 4px 5px 0 #000;
+			font-size: 5rem; 
+		}
 	}
 }

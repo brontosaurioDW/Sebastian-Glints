@@ -15,14 +15,10 @@ $desktop-large: new-breakpoint(min-width 1650px);
 // globals
 @import "globals/reset";
 @import "globals/vars";
-@import "globals/fonts";
 @import "globals/base";
-@import "globals/typography";
 @import "globals/glitch";
 
 // components
 @import "components/header";
-@import "components/navigation";
 @import "components/sections";
-@import "components/buttons";
 @import "components/songs";
