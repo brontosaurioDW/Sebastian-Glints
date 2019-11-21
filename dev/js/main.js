@@ -250,7 +250,7 @@ $(document).bind('touchend', function (e){
     direction = -1;
   }
 
-  if(currentSongNum >= 0){
+  if(direction == 1 && currentSongNum >= 0){
     
     if (listenToWheel) {
       listenToWheel = false;
