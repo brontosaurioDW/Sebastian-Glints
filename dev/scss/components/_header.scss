@@ -4,7 +4,9 @@
     height: 45px;
     position: fixed;
     -webkit-transform-origin: left top;
+    transform-origin: left top;
     -webkit-transform: rotate(-90deg) translateX(-100%);
+    transform: rotate(-90deg) translateX(-100%);
     z-index: 102;
 
     .logo {
@@ -77,6 +79,7 @@
     font-size: 0;
     color: transparent;
     cursor: pointer;
+    z-index: 10;
 }
 
 .overlay .overlay-close:hover {
@@ -256,13 +259,34 @@
             li {
                 width: 100%;
                 text-align: left;
-                margin: 1rem 0;
-                padding-left: 4rem;
+                padding: 1rem;
+                margin: 0;
 
                 a {
                     font-size: 1.8rem;
                 }
             }
+        }
+    }
+
+    .overlay-contentpush.open {
+        z-index: 103;
+    }
+
+    .main-nav {
+        -webkit-transform-origin: unset;
+        transform-origin: unset;
+        -webkit-transform: none;
+        transform: none;
+        width: 100%;
+
+        .logo {
+            left: 1rem;
+            right: unset;
+        }
+
+        ul.nav {
+            padding-right: 0;
         }
     }
 }

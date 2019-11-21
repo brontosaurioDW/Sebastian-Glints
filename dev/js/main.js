@@ -244,9 +244,9 @@ $(document).bind('touchend', function (e){
   var te = e.originalEvent.changedTouches[0].clientY;
   var direction;
 
-  if(ts > te+5){
+  if(ts > te + 5){
     direction = 1;
-  } else if(ts < te-5){
+  } else if(ts < te - 5){
     direction = -1;
   }
 
