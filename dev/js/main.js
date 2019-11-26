@@ -159,20 +159,24 @@ function scrollInSong(direction) {
 
   // console.log("la cancion es: " + currentSongNum);
 
-  lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
-  thisLyricNum += direction;
-  prevLyricNum = thisLyricNum + (direction * -1);
+  if(allSongs[currentSongNum]){
 
-  // console.log("este lyric es " + thisLyricNum);
-  // console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
-  
-  thisLyric = lyricsInSong[thisLyricNum];
-  prevLyric = lyricsInSong[prevLyricNum];
+    lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
+    thisLyricNum += direction;
+    prevLyricNum = thisLyricNum + (direction * -1);
 
-  // console.log(thisLyric);
-  showHideLyrics(thisLyric, prevLyric);
+    // console.log("este lyric es " + thisLyricNum);
+    // console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
+    
+    thisLyric = lyricsInSong[thisLyricNum];
+    prevLyric = lyricsInSong[prevLyricNum];
 
-  allSongs[currentSongNum].setAttribute('data-lyricnum',thisLyricNum);
+    // console.log(thisLyric);
+    showHideLyrics(thisLyric, prevLyric);
+
+    allSongs[currentSongNum].setAttribute('data-lyricnum',thisLyricNum);
+
+  }
 
 }
 
@@ -188,7 +192,7 @@ function activateEndSong(direction) {
 
 function songChanged() {
 
-  if(currentSongNum >= 0){
+  if(currentSongNum >= 0 && allSongs[currentSongNum]){
     thisLyric = lyricsInSong[0];
     prevLyric = lyricsInSong[thisLyricNum];
     showHideLyrics(thisLyric, prevLyric);
@@ -217,6 +221,15 @@ function checkEndSong(direction) {
 }
 
 var ts;
+
+$('.js-cover, .js-credits').bind('wheel', function (e) {
+  var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
+  if(direction == -1){
+    fullpage_api.moveSectionUp();
+  } else {
+    fullpage_api.moveSectionDown();
+  }
+});
 
 $('.js-song').bind('wheel', function (e) {
 
