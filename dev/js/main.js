@@ -54,7 +54,6 @@ $(window).on("load", function() {
 
     var menuOption = $(overlay).find('.option');
     $(menuOption).each(function () {
-    	//console.log('clcik');
     	$(this).on('click', function(){
 	    	$(overlay).removeClass('open');
     	});
@@ -91,27 +90,25 @@ var lastLyric = false;
 $(document).ready(function() {
 
 	new fullpage('#fullpage', {
-		//menu: '#menu',
-		//anchors:['cover', 'song-1', 'song-2', 'song-3', 'song-4', 'song-5', 'song-6', 'song-7', 'song-8', 'song-9', 'song-10', 'song-11', 'song-12', 'song-13',],
-		navigation: true,
-		navigationPosition: 'left',
-
-		scrollOverflow: true,
-		scrollOverflowReset: true,
-		scrollingSpeed: 1000,
-		fadingEffect: true,
-		parallax: true,
-		css3: false,
-		scrollbars: true,
+    scrolloverflow: false,
+    scrollOverflowReset: false,
+    navigation: true,
+    navigationPosition: 'left',
+    fadingEffect: true,
+    parallax: true,
+    css3: false,
+    scrollbars: true,
+    responsive: true,    
+    resize: true,
+    verticalCentered: true,
+    normalScrollElements: '#credits',
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
     afterLoad: function(origin, destination, direction){
       currentSongNum = destination.index - 1;
-      console.log("TAMO en la cancion numero: " + currentSongNum);
+      // console.log("TAMO en la cancion numero: " + currentSongNum);
       songChanged();
     }
 	});
-
-
 });
 
 
@@ -152,19 +149,19 @@ function scrollInSong(direction) {
 
   blockScroll();
 
-  console.log("la cancion es: " + currentSongNum);
+  // console.log("la cancion es: " + currentSongNum);
 
   lyricsInSong = allSongs[currentSongNum].getElementsByClassName("js-lyric");
   thisLyricNum += direction;
   prevLyricNum = thisLyricNum + (direction * -1);
 
-  console.log("este lyric es " + thisLyricNum);
-  console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
+  // console.log("este lyric es " + thisLyricNum);
+  // console.log("esta cancion tiene " + lyricsInSong.length + " lineas");
   
   thisLyric = lyricsInSong[thisLyricNum];
   prevLyric = lyricsInSong[prevLyricNum];
 
-  //console.log(thisLyric);
+  // console.log(thisLyric);
   showHideLyrics(thisLyric, prevLyric);
 
   allSongs[currentSongNum].setAttribute('data-lyricnum',thisLyricNum);
@@ -172,7 +169,7 @@ function scrollInSong(direction) {
 }
 
 function activateEndSong(direction) {
-  //allowScroll();
+  // allowScroll();
   if(direction == 1) {
     fullpage_api.moveSectionDown();
   } else {
@@ -200,12 +197,12 @@ function checkEndSong(direction) {
 
   if ( (direction == 1 && thisLyricNum == lyricsInSong.length - 1) || (direction == -1 && thisLyricNum == 0) ) {
 
-    console.log("termino la cancion");
+    // console.log("termino la cancion");
     activateEndSong(direction);
 
   } else {
 
-    console.log("la cancion sigue");
+    // console.log("la cancion sigue");
     scrollInSong(direction);
 
   }

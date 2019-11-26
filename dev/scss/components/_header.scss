@@ -107,30 +107,15 @@
 /* Menu style */
 .overlay .nav-wrapper {
     text-align: center;
-    position: relative;
-    top: 50%;
-    height: 60%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    margin: 0 25vw;
 }
 
 .overlay ul {
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
     position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: self-start;
-    -ms-flex-align: self-start;
-    align-items: self-start;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
 
     img {
         width: 30px;
@@ -144,8 +129,15 @@
     line-height: normal;
     margin: 19.2px;
     margin: 1.2rem;
-    width: 33%;
+    width: auto;
     text-align: left;
+    display: inline-block;
+}
+
+.overlay ul li.credits-link {
+    display: block;
+    margin: 5rem 0 0;
+    text-align: center;
 }
 
 .overlay ul li a {
@@ -174,6 +166,7 @@
     -webkit-transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
 
 .sg-wrapper.overlay-open {
@@ -219,6 +212,16 @@
     transform: translateX(0%);
     -webkit-transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 @media screen and (max-height:30.5em) {
@@ -248,13 +251,22 @@
             text-align: left;
             top: 0;
             height: 100vh;
+            -webkit-transform: none;
             transform: none;
             overflow-y: auto;
+            margin: 0 5vw;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
         }
 
         ul {
             display: block;
-            padding: 5rem 0;
+            padding: 10rem 0;
+
+
+            li.credits-link {
+                text-align: left;
+            }
 
             li {
                 width: 100%;
@@ -283,6 +295,9 @@
         .logo {
             left: 1rem;
             right: unset;
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            width: 45px;
         }
 
         ul.nav {
