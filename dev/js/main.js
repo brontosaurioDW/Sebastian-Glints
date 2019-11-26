@@ -112,6 +112,10 @@ $(document).ready(function() {
     normalScrollElements: '#credits',
 		licenseKey: '58C9F4E3-BB01438E-A94640F4-C5A13204',
     afterLoad: function(origin, destination, direction){
+      console.log('allowScroll');
+      if($(destination.item).hasClass('js-cover') || $(destination.item).hasClass('js-credits')){
+        allowScroll();
+      }
       currentSongNum = destination.index - 1;
       // console.log("TAMO en la cancion numero: " + currentSongNum);
       songChanged();
@@ -222,7 +226,7 @@ function checkEndSong(direction) {
 
 var ts;
 
-$('.js-cover, .js-credits').bind('wheel', function (e) {
+$('.js-cover, .js-credits').bind('wheel scroll', function (e) {
   var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
   if(direction == -1){
     fullpage_api.moveSectionUp();
@@ -231,7 +235,7 @@ $('.js-cover, .js-credits').bind('wheel', function (e) {
   }
 });
 
-$('.js-song').bind('wheel', function (e) {
+$('.js-song').bind('wheel scroll', function (e) {
 
   var ts = window.pageYOffset || document.documentElement.scrollTop;
   var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
