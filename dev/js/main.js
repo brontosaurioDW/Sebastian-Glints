@@ -255,7 +255,7 @@ $(document).bind('touchend', function (e){
     direction = -1;
   }
 
-  if(direction == 1 && currentSongNum >= 0){
+  if(direction == -1 && currentSongNum >= 0 || direction == 1 && currentSongNum >= 0){
     
     if (listenToWheel) {
       listenToWheel = false;
@@ -266,9 +266,11 @@ $(document).bind('touchend', function (e){
         listenToWheel = true;
       }, 400);
     }
+    
   } else {
 
     blockScroll();
     
   }
+  
 });
