@@ -222,7 +222,7 @@ function checkEndSong(direction) {
 
 var ts;
 
-$('.js-cover, .js-credits').bind('wheel', function (e) {
+$('.js-cover, .js-credits').bind('wheel, scroll', function (e) {
   var direction =  findScrollDirectionOtherBrowsers(e.originalEvent);
   if(direction == -1){
     fullpage_api.moveSectionUp();
