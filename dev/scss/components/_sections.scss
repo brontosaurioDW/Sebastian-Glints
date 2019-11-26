@@ -137,11 +137,43 @@ main {
 		opacity: 0.8;
 	}
 
+}
+
+
+.sg-plain-content-credits {
+	display: block;
+	justify-content: center;
+
+	.sg-plain-content-inner {
+		margin: 0 4rem;
+	}
+
+	h2 {
+		margin-bottom: 3rem;
+	}
+
+	h3 {
+		font-family: $featured;
+	    font-size: 3rem;
+	    text-shadow: 4px 4px 0 rgba(0,0,0,.9);
+	    line-height: 85%;
+	    margin: 2rem 0;
+	}
+
+	p {
+		line-height: 150%;
+		margin: .8rem 0;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		opacity: 0.8;
+	}
+
 	.copyright {
 		position: absolute;
-	    left: 2rem;
-	    bottom: 0;
-	    right: 2rem;
+	    left: 3rem;
+	    bottom: 5rem;
+	    right: 3rem;
 	    text-align: center;
 	    opacity: .5;
 	    text-transform: uppercase;
