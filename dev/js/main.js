@@ -53,10 +53,18 @@ $(window).on("load", function() {
     closeBttn.addEventListener('click', toggleOverlay);
 
     var menuOption = $(overlay).find('.option');
-    $(menuOption).each(function () {
-    	$(this).on('click', function(){
-	    	$(overlay).removeClass('open');
-    	});
+    $(menuOption).on('click', function(e){
+      e.preventDefault();
+      $(overlay).removeClass('open');
+      var section = parseInt($(this).attr('href').replace('#song-',''));
+      if($(this).attr('href') != 'cover'){
+        section = section + 1;
+        currentSongNum = section - 1;
+      } else {
+        section = 1;
+        currentSongNum = -1;
+      }
+      fullpage_api.moveTo(section,0);
     });
 })();
 
